@@ -65,6 +65,6 @@ let msg: IDiscordMsg = {
 };
 
 let url =
-  "https://discord.com/api/webhooks/1025055852547285023/n0R1LQ_tmmdK21wJE3tIRwzYLtBbBhzO39MM5gBjPkG8dfQYWiNMtUdtM4_G_BwKMJrX";
+  "https://discord.com/api/webhooks/1025058438344085624/GDCac9gvjjdIyOM9hyMwdknyGbq_gsKLa79KY7Y4SQE30RsPbvW9XpMJQk6-1zzVBDGF";
 
 console.log(await new NotifyUser(url, msg)._Notify());
