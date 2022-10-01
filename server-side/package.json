@@ -1,0 +1,27 @@
+{
+  "name": "server-side",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf dist/*",
+    "start": "rimraf dist/* && tsc && cd dist && node index.js",
+    "dev": "nodemon --watch 'ts/*' --exec npm start",
+    "roll": "rimraf dist/* && tsc && cd dist && node"
+  },
+  "author": "Destrcut <destrcut.space@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.7.23",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.4",
+    "winston": "^3.8.2"
+  }
+}
