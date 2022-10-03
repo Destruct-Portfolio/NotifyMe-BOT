@@ -2,7 +2,7 @@
 
 import dotenv from "dotenv";
 import path from "path";
-import { Ilocals } from "../types/env";
+import { Ilocals } from "../types/types";
 
 export default class Locals {
   public static config(): Ilocals {

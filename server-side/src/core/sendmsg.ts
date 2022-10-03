@@ -1,36 +1,42 @@
 import axios from "axios";
-import Locals from "../misc/locals";
-import { IDiscordMsg } from "../types/embed";
-
+import Logger from "../misc/logger";
+import { IDiscordMsg } from "../types/types";
 /**
  * a class to consume the Discord Webhook
  */
 
-class NotifyUser {
+export class NotifyUser {
   private URL: string | null;
-  public msg: any;
-
+  public msg: IDiscordMsg;
+  #logger: Logger;
   /**
    * @param webhookurl the webhook url Provided by your Discord Channel
-   * @param message the msg to send
    */
 
   constructor(webhookurl: string, msg: IDiscordMsg) {
     this.URL = webhookurl;
     this.msg = msg;
+    this.#logger = new Logger("Notify", "Notify");
   }
+  async _exec() {
+    this.#logger.info(`[+] Sending msg to ${this.URL}`);
+    try {
+      let send_msg = await axios.post(this.URL!, this.msg, {
+        headers: { "content-type": "application/json" },
+      });
 
-  public async _Notify() {
-    let send_msg = await axios.post(this.URL!, this.msg, {
-      headers: { "content-type": "application/json" },
-    });
-    console.log(await send_msg);
+      this.#logger.info("[+] message successfully sent");
+    } catch (error: any) {
+      this.#logger.error(`[-] Failed to Send Msg for >> ${error.message}`);
+    }
   }
 }
 
+/**
+ * *an Example Msg To send
+ */
 let msg: IDiscordMsg = {
   username: "Notify_Me",
-  /*   content: "A new Product By The Name : NAME-HERE is in stock", */
   embeds: [
     {
       timestamp: new Date(),
@@ -39,24 +45,17 @@ let msg: IDiscordMsg = {
       description: "We found a new item to buy",
       url: "https://stackoverflow.com/questions/72075305/discord-bots-embed-size",
       thumbnail: {
-        url: "https://miro.medium.com/max/1400/1*fO8gQGV9HVi7153Jvby2Xg.jpeg",
-        height: 10000,
-        width: 10000,
+        url: "https://assets.reedpopcdn.com/ps5-console.png/BROK/thumbnail/1200x900/quality/100/ps5-console.png",
+        height: 200,
+        width: 200,
       },
       fields: [
         {
+          //website name
           name: "Filed One",
+          // link to website
           value: "Value One",
-          inline: false,
-        },
-        {
-          name: "Filed One",
-          value: "Value One",
-          inline: false,
-        },
-        {
-          name: "Filed One",
-          value: "Value One",
+          // just to make a vertical list keep it false
           inline: false,
         },
       ],
@@ -66,5 +65,3 @@ let msg: IDiscordMsg = {
 
 let url =
   "https://discord.com/api/webhooks/1025055852547285023/n0R1LQ_tmmdK21wJE3tIRwzYLtBbBhzO39MM5gBjPkG8dfQYWiNMtUdtM4_G_BwKMJrX";
-
-console.log(await new NotifyUser(url, msg)._Notify());

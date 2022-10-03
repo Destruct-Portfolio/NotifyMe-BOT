@@ -23,3 +23,13 @@ interface Iembed_field {
   value: string;
   inline: boolean;
 }
+export interface Ilocals {
+  PORT: number;
+  HOST: string;
+  API_Prefix: string;
+  DC_WebHook: string;
+}
+export interface IwebList {
+  website: string;
+  selector: string;
+}
