@@ -1,1 +1,7 @@
-// Here will call the Observer Claa s
+import Handler from "./core/handler.js";
+
+await (await new Handler()
+    .load()
+    .check())
+    .notify()
+    

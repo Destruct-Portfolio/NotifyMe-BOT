@@ -1,5 +1,6 @@
 import Server from "@ulixee/server";
 import Logger from "../../misc/logger.js";
+import Locals from "../../misc/locals.js";
 
 /**
  * Singleton Class
@@ -15,7 +16,7 @@ export class HeroServer {
   private constructor() {
     this._server = new Server();
     this._config = {
-      PORT: Number(process.env.HERO_PORT) || 3333,
+      PORT: Number(Locals.config().HeroServerPORT) || 3333,
     };
 
     return this;

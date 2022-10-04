@@ -10,7 +10,7 @@
     "dev": "nodemon --watch 'ts/*' --exec npm start",
     "roll": "rimraf dist/* && tsc && cd dist && node"
   },
-  "author": "Destrcut <destrcut.space@gmail.com>",
+  "author": "Destruct <destruct.space@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "@types/dotenv": "^8.2.0",

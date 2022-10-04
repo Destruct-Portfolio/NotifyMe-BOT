@@ -1,73 +1,48 @@
 import axios from "axios";
-import Logger from "../misc/logger";
-import { IDiscordMsg } from "../types/types";
+import Logger from "../misc/logger.js";
+import { IDiscordMsg } from "../types/discord";
+
 /**
- * a class to consume the Discord Webhook
+ * A class to consume the Discord Webhook
  */
+export default class NotifyUser {
 
-export class NotifyUser {
-  private URL: string | null;
-  public msg: IDiscordMsg;
-  #logger: Logger;
   /**
-   * @param webhookurl the webhook url Provided by your Discord Channel
+   * A webhook URL provided by the discord channel.
    */
+  private URL: string;
 
-  constructor(webhookurl: string, msg: IDiscordMsg) {
+  /**
+   * Message to send through the webhook
+   */
+  public msg: IDiscordMsg;
+
+  /**
+   * Logger.
+   */
+  #logger: Logger;
+
+
+  constructor(webhookurl: string, msg: IDiscordMsg, session: string) {
     this.URL = webhookurl;
     this.msg = msg;
-    this.#logger = new Logger("Notify", "Notify");
+    this.#logger = new Logger(NotifyUser.name, session);
   }
-  async _exec() {
-    this.#logger.info(`[+] Sending msg to ${this.URL}`);
+
+  async exec() {
+
+    this.#logger.info(`Sending msg to ${this.URL}`);
+  
     try {
-      let send_msg = await axios.post(this.URL!, this.msg, {
+
+      let send_msg = await axios.post(this.URL, this.msg, {
         headers: { "content-type": "application/json" },
       });
 
-      this.#logger.info("[+] message successfully sent");
-    } catch (error: any) {
-      this.#logger.error(`[-] Failed to Send Msg for >> ${error.message}`);
+      this.#logger.info("Message successfully sent.");
+    } catch (error) {
+
+      this.#logger.error(`Failed to send message. Error: ${error}`);
     }
   }
 }
-
-/**
- * *an Example Msg To send
- */
-let msg: IDiscordMsg = {
-  username: "Notify_Me",
-  embeds: [
-    {
-      timestamp: new Date(),
-      title: "New Product",
-      type: "rich",
-      description: "We found a new item to buy",
-      url: "https://stackoverflow.com/questions/72075305/discord-bots-embed-size",
-      thumbnail: {
-        url: "https://assets.reedpopcdn.com/ps5-console.png/BROK/thumbnail/1200x900/quality/100/ps5-console.png",
-        height: 200,
-        width: 200,
-      },
-      fields: [
-        {
-          //website name
-          name: "Filed One",
-          // link to website
-          value: "Value One",
-          // just to make a vertical list keep it false
-          inline: false,
-        },
-      ],
-    },
-  ],
-};
-
-let url =
-<<<<<<< HEAD
-  "https://discord.com/api/webhooks/1025055852547285023/n0R1LQ_tmmdK21wJE3tIRwzYLtBbBhzO39MM5gBjPkG8dfQYWiNMtUdtM4_G_BwKMJrX";
-=======
-  "https://discord.com/api/webhooks/1025058438344085624/GDCac9gvjjdIyOM9hyMwdknyGbq_gsKLa79KY7Y4SQE30RsPbvW9XpMJQk6-1zzVBDGF";
-
-console.log(await new NotifyUser(url, msg)._Notify());
->>>>>>> e8bb1ace0b8f0245fd02969efd65e6d648f1b576
