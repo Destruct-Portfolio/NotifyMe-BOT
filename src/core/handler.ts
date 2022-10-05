@@ -5,7 +5,7 @@ import Logger from "../misc/logger.js";
 import { HeroServer } from "./deps/shero.js";
 import MessageFormatter from "../components/formatter.js";
 import NotifyUser from "./sendmsg.js";
-import Locals from "src/misc/locals.js";
+import Locals from "../misc/locals.js";
 
 
 /**

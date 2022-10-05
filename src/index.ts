@@ -24,6 +24,7 @@ class Index {
     }
 
     static async  run () {
+        console.log(`Monitoring every ${Locals.config().PeriodCheckInMinutes} minutes...`)
         Index._setup()
         Schedule.scheduleJob(`* */${Locals.config().PeriodCheckInMinutes} * * * *`, Index._task)
     }

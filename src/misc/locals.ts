@@ -6,8 +6,7 @@ import path from "path";
 
 export default class Locals {
   public static config(){
-    const dirname = path.dirname("../../.env");
-    dotenv.config({ path: path.join(dirname, "/.env") });
+    dotenv.config({ path: "../.env" });
 
     const HeroServerPORT = parseInt(process.env.HERO_SERVER_PORT!) || 6806
     const DiscordWebhook = process.env.DISCORD_WEBHOOK || null
