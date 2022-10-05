@@ -5,6 +5,7 @@ import Logger from "../misc/logger.js";
 import { HeroServer } from "./deps/shero.js";
 import MessageFormatter from "../components/formatter.js";
 import NotifyUser from "./sendmsg.js";
+import Locals from "src/misc/locals.js";
 
 
 /**
@@ -108,10 +109,12 @@ export default class Handler {
 
         const message = new MessageFormatter(this.#_new_found_items).render()
 
-        let webhook = "https://discord.com/api/webhooks/1025058438344085624/GDCac9gvjjdIyOM9hyMwdknyGbq_gsKLa79KY7Y4SQE30RsPbvW9XpMJQk6-1zzVBDGF";
+        let webhook = Locals.config().DiscordWebhook
 
-        if (message) {
+        if (message && webhook) {
             await new NotifyUser(webhook, message, this.#_session).exec()
+        } else {
+            this.#_logger.error('Provide a valid Discord webhook.')
         }
     }
 }

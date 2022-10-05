@@ -43,7 +43,7 @@ export default class Snapshot {
             this.#_logger.info("Comparing snapshots ...");
 
             const res = Lodash.differenceBy(this.#_current_snapshot, this.#_latest_snapshot!, "name");
-            if (res.length > 0) {
+            if (res.length > 0 && this.#_latest_snapshot!.length!==0) {
                 this.#_logger.info(`Found new items!`);
                 this.take()
                 return res
