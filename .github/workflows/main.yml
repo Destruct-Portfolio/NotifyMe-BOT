@@ -36,12 +36,9 @@ jobs:
       - name: Run node script
         timeout-minutes: 2880
         run: |
-            ./Run-Every.ps1 (New-TimeSpan -Minutes 10) -Schedule
+          npm ci
+          npm run start 
 
-      - name: Sleep for 1h
-        uses: juliangruber/sleep-action@v1
-        with:
-          time: 1h
 
           
 
