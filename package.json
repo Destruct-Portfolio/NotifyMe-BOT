@@ -8,7 +8,8 @@
     "clean": "rimraf dist/*",
     "start": "rimraf dist/* && tsc && cd dist && node index.js",
     "dev": "nodemon --watch 'ts/*' --exec npm start",
-    "roll": "rimraf dist/* && tsc && cd dist && node"
+    "roll": "rimraf dist/* && tsc && cd dist && node",
+    "cloud": "cd dist && node index"
   },
   "author": "Destruct <destruct.space@gmail.com>",
   "license": "ISC",
