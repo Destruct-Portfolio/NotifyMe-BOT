@@ -60,9 +60,7 @@ export class NoLoadScrappingJob {
 
         this.#_logger.info(`Navigating to ${this.#_sources[i].website}`)
       this.#_client?.goto(this.#_sources[i].website);
-      fs.writeFileSync(`${i}.jpeg`, await this.#_client!.takeScreenshot());
       await this.#_client!.waitForLoad("DomContentLoaded");
-      fs.writeFileSync(`${i}.jpeg`, await this.#_client!.takeScreenshot());
 
       let pannel = await this.#_client!.document.querySelector(
         this.#_sources[i].selector
