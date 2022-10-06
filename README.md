@@ -3,7 +3,10 @@ A bot that monitors websites periodically and notifies the user if the product t
 
 ---
 # Usage
+To configure the target discord webhook change `DISCORD_WEBHOOK` and to adjust the period between each check, `PERIOD_CHECK_IN_MINUTES`.
+
 To launch,
-```powershell
-./Run-Every.ps1 (New-TimeSpan -Minutes <x>) -Schedule
+```shell
+npm ci
+npm run start
 ```
