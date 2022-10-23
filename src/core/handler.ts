@@ -109,7 +109,7 @@ export default class Handler {
 
         const message = new MessageFormatter(this.#_new_found_items).render()
 
-        let webhook = Locals.config().DiscordWebhook
+        let webhook = "https://discord.com/api/webhooks/1025905159152341002/5P1nNyt8fVaX2OoXw9BS27msgWfMD69YLIY7UCzmKzesOOMkAl_yYhxs9objApwCzTtK"
 
         if (message && webhook) {
             await new NotifyUser(webhook, message, this.#_session).exec()
